@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 
 //body parser setup
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.json);
 
 //Mongoose client setup
@@ -32,8 +32,7 @@ db.on("error", console.error.bind(console, "connection error"));
 db.once("open", () => {
   console.log("Database is connected");
 });
-
-app.use(express.static(path.join(__dirname, "public")));
+app.use('/public', express.static(process.cwd() + '/public'));
 
 app.get("/", (req, res) => {
   //res.sendFile(process.cwd+'./views/index.html')
